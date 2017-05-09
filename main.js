@@ -11,13 +11,19 @@ oReq.send()
 // 	Things[i]
 // }
 
+function sentimentsToEmoji(sentiment){
+  if (sentiment <0.2 ) {return ":("};
+  if (sentiment <0.8) {return ":|"};
+  return ":)"
+}
+
 function reqListener () {
   var data = JSON.parse(this.responseText)
   var texthtml = ""
   var titles=[]
   var numVis=[]
   for (var i = 0; i < data.length; i++) {
-    titles.push(data[i].titulo);
+    titles.push(data[i].titulo +  sentimentsToEmoji(data[i].sentimiento));
     numVis.push(data[i].visitas);
 
   	texthtml = texthtml + "<h1> "+ data[i].titulo +" </h1>"
